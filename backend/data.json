@@ -1,0 +1,60 @@
+{
+  "rows": 3,
+  "cols": 3,
+  "cells": {
+    "A1": {
+      "address": "A1",
+      "expression": "44<222",
+      "value": 1,
+      "error": null
+    },
+    "B1": {
+      "address": "B1",
+      "expression": "A1",
+      "value": 1,
+      "error": null
+    },
+    "C1": {
+      "address": "C1",
+      "expression": "24",
+      "value": 24,
+      "error": null
+    },
+    "A2": {
+      "address": "A2",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "B2": {
+      "address": "B2",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "C2": {
+      "address": "C2",
+      "expression": "C1",
+      "value": 24,
+      "error": null
+    },
+    "A3": {
+      "address": "A3",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "B3": {
+      "address": "B3",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "C3": {
+      "address": "C3",
+      "expression": "",
+      "value": 0,
+      "error": null
+    }
+  }
+}
