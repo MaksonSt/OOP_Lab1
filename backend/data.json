@@ -1,0 +1,438 @@
+{
+  "rows": 8,
+  "cols": 9,
+  "cells": {
+    "A1": {
+      "address": "A1",
+      "expression": "55",
+      "value": 55,
+      "error": null
+    },
+    "B1": {
+      "address": "B1",
+      "expression": "A1 mod A2",
+      "value": 7,
+      "error": null
+    },
+    "C1": {
+      "address": "C1",
+      "expression": "5",
+      "value": 5,
+      "error": null
+    },
+    "A2": {
+      "address": "A2",
+      "expression": "24",
+      "value": 24,
+      "error": null
+    },
+    "B2": {
+      "address": "B2",
+      "expression": "A1 div A2",
+      "value": 2,
+      "error": null
+    },
+    "C2": {
+      "address": "C2",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "A3": {
+      "address": "A3",
+      "expression": "C1+4",
+      "value": 9,
+      "error": null
+    },
+    "B3": {
+      "address": "B3",
+      "expression": "A1+A2",
+      "value": 79,
+      "error": null
+    },
+    "C3": {
+      "address": "C3",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "D1": {
+      "address": "D1",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "D2": {
+      "address": "D2",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "D3": {
+      "address": "D3",
+      "expression": "E3",
+      "value": 0,
+      "error": "Виявлено циклічні залежності під час обчислення"
+    },
+    "E1": {
+      "address": "E1",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "E2": {
+      "address": "E2",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "E3": {
+      "address": "E3",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "A4": {
+      "address": "A4",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "B4": {
+      "address": "B4",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "C4": {
+      "address": "C4",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "D4": {
+      "address": "D4",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "E4": {
+      "address": "E4",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "A5": {
+      "address": "A5",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "B5": {
+      "address": "B5",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "C5": {
+      "address": "C5",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "D5": {
+      "address": "D5",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "E5": {
+      "address": "E5",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "A6": {
+      "address": "A6",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "B6": {
+      "address": "B6",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "C6": {
+      "address": "C6",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "D6": {
+      "address": "D6",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "E6": {
+      "address": "E6",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "A7": {
+      "address": "A7",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "B7": {
+      "address": "B7",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "C7": {
+      "address": "C7",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "D7": {
+      "address": "D7",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "E7": {
+      "address": "E7",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "A8": {
+      "address": "A8",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "B8": {
+      "address": "B8",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "C8": {
+      "address": "C8",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "D8": {
+      "address": "D8",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "E8": {
+      "address": "E8",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "F1": {
+      "address": "F1",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "F2": {
+      "address": "F2",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "F3": {
+      "address": "F3",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "F4": {
+      "address": "F4",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "F5": {
+      "address": "F5",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "F6": {
+      "address": "F6",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "F7": {
+      "address": "F7",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "F8": {
+      "address": "F8",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "G1": {
+      "address": "G1",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "G2": {
+      "address": "G2",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "G3": {
+      "address": "G3",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "G4": {
+      "address": "G4",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "G5": {
+      "address": "G5",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "G6": {
+      "address": "G6",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "G7": {
+      "address": "G7",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "G8": {
+      "address": "G8",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "H1": {
+      "address": "H1",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "H2": {
+      "address": "H2",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "H3": {
+      "address": "H3",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "H4": {
+      "address": "H4",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "H5": {
+      "address": "H5",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "H6": {
+      "address": "H6",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "H7": {
+      "address": "H7",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "H8": {
+      "address": "H8",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "I1": {
+      "address": "I1",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "I2": {
+      "address": "I2",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "I3": {
+      "address": "I3",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "I4": {
+      "address": "I4",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "I5": {
+      "address": "I5",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "I6": {
+      "address": "I6",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "I7": {
+      "address": "I7",
+      "expression": "",
+      "value": 0,
+      "error": null
+    },
+    "I8": {
+      "address": "I8",
+      "expression": "",
+      "value": 0,
+      "error": null
+    }
+  }
+}
