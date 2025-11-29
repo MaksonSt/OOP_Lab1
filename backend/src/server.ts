@@ -105,5 +105,6 @@ app.post('/api/clear', (_req: Request, res: Response) => {
 loadSpreadsheet();
 
 app.listen(PORT, () => {
-  console.log(` Backend запущений на http://localhost:${PORT}`);
+  console.log(`✅ Backend запущений на http://localhost:${PORT}`);
 });
+

@@ -118,4 +118,5 @@ export class Parser {
 
     throw new Error(`Невідомий токен: ${token.type} ${token.value}`);
   }
-} 
+}
+

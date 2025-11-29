@@ -56,7 +56,7 @@ export class Spreadsheet {
     return dependencies;
   }
 
-  private detectCycles(startAddress: string): void {
+  private detectAllCycles(): void {
     const visited = new Set<string>();
     const recStack = new Set<string>();
 
@@ -64,7 +64,7 @@ export class Spreadsheet {
       if (recStack.has(addr)) {
         throw new Error(`Циклічна залежність виявлена: ${addr}`);
       }
-      
+
       if (visited.has(addr)) {
         return;
       }
@@ -83,168 +83,136 @@ export class Spreadsheet {
       recStack.delete(addr);
     };
 
-    dfs(startAddress);
-  }
-// Заміни старий метод setCell на цей:
-setCell(address: string, expression: string): void {
-  const addr = address.toUpperCase();
-  if (!this.cells.has(addr)) {
-    throw new Error(`Комірка ${addr} не існує`);
-  }
-
-  if (expression) {
-    const dependencies = this.findCellDependencies(expression);
-    for (const dep of dependencies) {
-      if (!this.cells.has(dep)) {
-        throw new Error(`Комірка ${dep} не існує`);
+    for (const [addr, cell] of this.cells) {
+      if (cell.expression && !visited.has(addr)) {
+        dfs(addr);
       }
     }
   }
 
-  const cell = this.cells.get(addr)!;
-  cell.expression = expression;
-
-  try {
-    this.detectAllCycles();
-    cell.error = null;
-    this.recalculate();
-  } catch (e: any) {
-    // Зберігаємо помилку в комірці, не відкочуємо зміни
-    cell.error = e.message;
-    cell.value = 0;
-  }
-}
-
-// Додай цей новий метод:
-private detectAllCycles(): void {
-  const visited = new Set<string>();
-  const recStack = new Set<string>();
-
-  const dfs = (addr: string): void => {
-    if (recStack.has(addr)) {
-      throw new Error(`Циклічна залежність виявлена: ${addr}`);
+  setCell(address: string, expression: string): void {
+    const addr = address.toUpperCase();
+    if (!this.cells.has(addr)) {
+      throw new Error(`Комірка ${addr} не існує`);
     }
 
-    if (visited.has(addr)) {
-      return;
-    }
-
-    visited.add(addr);
-    recStack.add(addr);
-
-    const cell = this.cells.get(addr);
-    if (cell && cell.expression) {
-      const dependencies = this.findCellDependencies(cell.expression);
+    if (expression) {
+      const dependencies = this.findCellDependencies(expression);
       for (const dep of dependencies) {
-        dfs(dep);
-      }
-    }
-
-    recStack.delete(addr);
-  };
-
-  for (const [addr, cell] of this.cells) {
-    if (cell.expression && !visited.has(addr)) {
-      dfs(addr);
-    }
-  }
-}
-
-// Заміни метод recalculate:
-private recalculate(): void {
-  const cellValues: { [key: string]: number } = {};
-  const cellsToCalculate: string[] = [];
-
-  for (const [addr, cell] of this.cells) {
-    if (!cell.expression) {
-      cell.value = 0;
-      cellValues[addr] = 0;
-    } else {
-      cellsToCalculate.push(addr);
-    }
-  }
-
-  const sorted = this.topologicalSort(cellsToCalculate);
-
-  for (const addr of sorted) {
-    const cell = this.cells.get(addr)!;
-
-    try {
-      const lexer = new Lexer(cell.expression);
-      const tokens = lexer.tokenize();
-      const parser = new Parser(tokens);
-      const ast = parser.parse();
-
-      this.evaluator.setCellValues(cellValues);
-      const value = this.evaluator.evaluate(ast, addr);
-      cell.value = value;
-      cell.error = null;
-      cellValues[addr] = value;
-    } catch (e: any) {
-      cell.error = e.message;
-      cell.value = 0;
-      cellValues[addr] = 0;
-    }
-  }
-}
-
-// Додай новий метод топологічного сортування:
-private topologicalSort(addresses: string[]): string[] {
-  const graph = new Map<string, Set<string>>();
-  const inDegree = new Map<string, number>();
-
-  for (const addr of addresses) {
-    graph.set(addr, new Set());
-    inDegree.set(addr, 0);
-  }
-
-  for (const addr of addresses) {
-    const cell = this.cells.get(addr)!;
-    const dependencies = this.findCellDependencies(cell.expression);
-
-    for (const dep of dependencies) {
-      if (!graph.has(dep)) {
-        graph.set(dep, new Set());
-        inDegree.set(dep, 0);
-      }
-
-      graph.get(dep)!.add(addr);
-      inDegree.set(addr, (inDegree.get(addr) || 0) + 1);
-    }
-  }
-
-  const queue: string[] = [];
-  const result: string[] = [];
-
-  for (const [addr, degree] of inDegree) {
-    if (degree === 0) {
-      queue.push(addr);
-    }
-  }
-
-  while (queue.length > 0) {
-    const current = queue.shift()!;
-    result.push(current);
-
-    const neighbors = graph.get(current);
-    if (neighbors) {
-      for (const neighbor of neighbors) {
-        const newDegree = inDegree.get(neighbor)! - 1;
-        inDegree.set(neighbor, newDegree);
-
-        if (newDegree === 0) {
-          queue.push(neighbor);
+        if (!this.cells.has(dep)) {
+          throw new Error(`Комірка ${dep} не існує`);
         }
       }
     }
+
+    const cell = this.cells.get(addr)!;
+    cell.expression = expression;
+
+    try {
+      this.detectAllCycles();
+      cell.error = null;
+      this.recalculate();
+    } catch (e: any) {
+      // Зберігаємо помилку в комірці, не відкочуємо зміни
+      cell.error = e.message;
+      cell.value = 0;
+    }
   }
 
-  if (result.length !== addresses.length) {
-    throw new Error('Виявлено циклічні залежності під час обчислення');
+  private recalculate(): void {
+    const cellValues: { [key: string]: number } = {};
+    const cellsToCalculate: string[] = [];
+
+    for (const [addr, cell] of this.cells) {
+      if (!cell.expression) {
+        cell.value = 0;
+        cellValues[addr] = 0;
+      } else {
+        cellsToCalculate.push(addr);
+      }
+    }
+
+    const sorted = this.topologicalSort(cellsToCalculate);
+
+    for (const addr of sorted) {
+      const cell = this.cells.get(addr)!;
+
+      try {
+        const lexer = new Lexer(cell.expression);
+        const tokens = lexer.tokenize();
+        const parser = new Parser(tokens);
+        const ast = parser.parse();
+
+        this.evaluator.setCellValues(cellValues);
+        const value = this.evaluator.evaluate(ast, addr);
+        cell.value = value;
+        cell.error = null;
+        cellValues[addr] = value;
+      } catch (e: any) {
+        cell.error = e.message;
+        cell.value = 0;
+        cellValues[addr] = 0;
+      }
+    }
   }
 
-  return result;
-}
+  private topologicalSort(addresses: string[]): string[] {
+    const graph = new Map<string, Set<string>>();
+    const inDegree = new Map<string, number>();
+
+    for (const addr of addresses) {
+      graph.set(addr, new Set());
+      inDegree.set(addr, 0);
+    }
+
+    for (const addr of addresses) {
+      const cell = this.cells.get(addr)!;
+      const dependencies = this.findCellDependencies(cell.expression);
+
+      for (const dep of dependencies) {
+        if (!graph.has(dep)) {
+          graph.set(dep, new Set());
+          inDegree.set(dep, 0);
+        }
+
+        graph.get(dep)!.add(addr);
+        inDegree.set(addr, (inDegree.get(addr) || 0) + 1);
+      }
+    }
+
+    const queue: string[] = [];
+    const result: string[] = [];
+
+    for (const [addr, degree] of inDegree) {
+      if (degree === 0) {
+        queue.push(addr);
+      }
+    }
+
+    while (queue.length > 0) {
+      const current = queue.shift()!;
+      result.push(current);
+
+      const neighbors = graph.get(current);
+      if (neighbors) {
+        for (const neighbor of neighbors) {
+          const newDegree = inDegree.get(neighbor)! - 1;
+          inDegree.set(neighbor, newDegree);
+
+          if (newDegree === 0) {
+            queue.push(neighbor);
+          }
+        }
+      }
+    }
+
+    if (result.length !== addresses.length) {
+      throw new Error('Виявлено циклічні залежності під час обчислення');
+    }
+
+    return result;
+  }
+
   getCell(address: string): Cell {
     const addr = address.toUpperCase();
     const cell = this.cells.get(addr);
@@ -352,3 +320,4 @@ private topologicalSort(addresses: string[]): string[] {
     };
   }
 }
+

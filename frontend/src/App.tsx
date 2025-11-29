@@ -138,7 +138,7 @@ function App() {
   return (
     <div className="app">
       <header className="header">
-        <h1> Електронна таблиця</h1>
+        <h1>📊 Електронна таблиця</h1>
         <p className="subtitle">Онлайн редактор таблиць з парсингом виразів</p>
       </header>
 
@@ -160,17 +160,17 @@ function App() {
 
       <section className="controls">
         <div className="mode-toggle">
-          <button 
-            className={viewMode === 'expression' ? 'active' : ''} 
+          <button
+            className={viewMode === 'expression' ? 'active' : ''}
             onClick={() => setViewMode('expression')}
           >
-             Вирази
+            📝 Вирази
           </button>
-          <button 
-            className={viewMode === 'value' ? 'active' : ''} 
+          <button
+            className={viewMode === 'value' ? 'active' : ''}
             onClick={() => setViewMode('value')}
           >
-             Значення
+            🔢 Значення
           </button>
         </div>
 
@@ -182,8 +182,8 @@ function App() {
         </div>
 
         <div className="file-controls">
-          <button onClick={save} className="btn-save"> Зберегти</button>
-          <button onClick={clear} className="btn-clear"> Очистити</button>
+          <button onClick={save} className="btn-save">💾 Зберегти</button>
+          <button onClick={clear} className="btn-clear">🗑️ Очистити</button>
         </div>
       </section>
 
@@ -215,7 +215,7 @@ function App() {
                           <div className="cell-address">{cell.address}</div>
                           <div className="cell-display">
                             {cell.error ? (
-                              <span className="error-text"> {cell.error}</span>
+                              <span className="error-text">⚠️ {cell.error}</span>
                             ) : viewMode === 'expression' ? (
                               <span>{cell.expression || '—'}</span>
                             ) : (
@@ -238,3 +238,4 @@ function App() {
 }
 
 export default App;
+

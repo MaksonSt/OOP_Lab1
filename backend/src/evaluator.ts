@@ -13,7 +13,7 @@ export class Evaluator {
 
   evaluate(node: ASTNode, cellRef?: string): number {
     if (cellRef && this.computing.has(cellRef)) {
-      throw new Error(`Циклічна залежність: ${cellRef}`);   
+      throw new Error(`Циклічна залежність: ${cellRef}`);
     }
 
     if (cellRef) {
@@ -48,46 +48,35 @@ export class Evaluator {
       const right = this.evaluateNode(node.right);
 
       switch (node.op) {
-        case '+':
-          return left + right;
-        case '-':
-          return left - right;
-        case '*':
-          return left * right;
+        case '+': return left + right;
+        case '-': return left - right;
+        case '*': return left * right;
         case '/':
           if (right === 0) throw new Error('Ділення на нуль');
-          return Math.floor(left / right);
-        case 'mod':
-          if (right === 0) throw new Error('Ділення на нуль (mod)');
-          return left % right;
-        case 'div':
-          if (right === 0) throw new Error('Ділення на нуль (div)');
-          return Math.floor(left / right);
-        case '=':
-          return left === right ? 1 : 0;
-        case '<':
-          return left < right ? 1 : 0;
-        case '>':
-          return left > right ? 1 : 0;
-        case '<=':
-          return left <= right ? 1 : 0;
-        case '>=':
-          return left >= right ? 1 : 0;
-        case '<>':
-          return left !== right ? 1 : 0;
-        default:
-          throw new Error(`Невідома операція: ${node.op}`);
+          return left / right;
+        case 'mod': return left % right;
+        case 'div': return Math.floor(left / right);
+        case '=': return left === right ? 1 : 0;
+        case '<': return left < right ? 1 : 0;
+        case '>': return left > right ? 1 : 0;
+        case '<=': return left <= right ? 1 : 0;
+        case '>=': return left >= right ? 1 : 0;
+        case '<>': return left !== right ? 1 : 0;
+        default: throw new Error(`Невідома операція: ${node.op}`);
       }
     }
 
     if (node.type === 'UnaryOp') {
-      const expr = this.evaluateNode(node.expr);
-      if (node.op === '+') return expr;
-      if (node.op === '-') return -expr;
-      if (node.op === 'not') return expr === 0 ? 1 : 0;
-      throw new Error(`Невідома унарна операція: ${node.op}`);
+      const val = this.evaluateNode(node.expr);
+      switch (node.op) {
+        case '+': return val;
+        case '-': return -val;
+        case 'not': return val === 0 ? 1 : 0;
+        default: throw new Error(`Невідома унарна операція: ${node.op}`);
+      }
     }
 
-    throw new Error(`Невідомий тип вузла: ${node.type}`);
+    throw new Error(`Невідомий тип вузла: ${(node as any).type}`);
   }
 }
+
